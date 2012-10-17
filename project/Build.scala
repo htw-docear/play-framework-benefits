@@ -8,11 +8,11 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
-      // Add your project dependencies here,
+      "info.schleichardt" %% "play-2-basic-auth" % "0.1-SNAPSHOT"
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
-      // Add your own project settings here      
+      resolvers += "schleichardts Github" at "http://schleichardt.github.com/jvmrepo/"
     )
 
 }
