@@ -8,6 +8,7 @@ import play.mvc.*;
 
 import sync.CometPropertyChangeListener;
 import sync.FileContent;
+import sync.LongPollingPropertyChangeListener;
 import sync.WebSocketPropertyChangeListener;
 import views.html.*;
 
@@ -58,5 +59,18 @@ public class Application extends Controller {
         };
 
         return ok(comet);
+    }
+
+    public static Result longPollingUpdateFeed() {
+        Chunks<String> chunks = new StringChunks() {
+            public void onReady(Chunks.Out<String> out) {
+                FileContent.getInstance().addPropertyChangeListener(new LongPollingPropertyChangeListener(out));
+            }
+        };
+        return ok(chunks);
+    }
+
+    public static Result showLongPollingTextSync() {
+        return ok(longPolling.render(FileContent.getInstance().getContent()));
     }
 }

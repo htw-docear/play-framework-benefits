@@ -1,0 +1,17 @@
+@(content: String)
+
+@main("long polling"){
+<script type="text/javascript">
+    function long_polling() {
+        $.get('@controllers.routes.Application.longPollingUpdateFeed()', function(data) {
+            $('#synced-text-file').html(data);
+            long_polling();
+        });
+    }
+    long_polling();
+</script>
+<pre id="synced-text-file">
+@content
+</pre>
+<p id="ws-status"></p>
+}

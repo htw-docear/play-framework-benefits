@@ -1,7 +1,7 @@
 $ ->
   $output = $("#synced-text-file")
   if window.wsUrl != ""
-    websocket = new WebSocket();
+    websocket = new WebSocket(window.wsUrl);
     websocket.onopen = (event) -> $("#ws-status").html("connection established")
     websocket.onmessage = (event) ->
       console.log("received " + event.data)
