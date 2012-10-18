@@ -9,8 +9,6 @@ import sync.FileContent;
 import sync.WebSocketPropertyChangeListener;
 import views.html.*;
 
-import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.io.IOException;
 
 public class Application extends Controller {

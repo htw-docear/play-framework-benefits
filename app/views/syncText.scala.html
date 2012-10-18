@@ -1,5 +1,12 @@
 @(content: String)
 
-<pre>
+@main("text feed"){
+    <script type="text/javascript">
+        var wsUrl = "@controllers.routes.Application.updateFeed().webSocketURL(request)"
+    </script>
+<pre id="synced-text-file">
 @content
 </pre>
+    <p id="ws-status">NO WEBSOCKET CONNECTION ESTABLISHED</p>
+}
+
