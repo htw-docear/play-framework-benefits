@@ -2,9 +2,11 @@ package controllers;
 
 import org.apache.commons.io.FileUtils;
 import play.*;
+import play.libs.Comet;
 import play.libs.F;
 import play.mvc.*;
 
+import sync.CometPropertyChangeListener;
 import sync.FileContent;
 import sync.WebSocketPropertyChangeListener;
 import views.html.*;
@@ -46,5 +48,15 @@ public class Application extends Controller {
                 FileContent.getInstance().addPropertyChangeListener(new WebSocketPropertyChangeListener(out));
             }
         };
+    }
+
+    public static Result cometUpdateFeed() {
+        Comet comet = new Comet("parent.cometMessage") {
+            public void onConnected() {
+                FileContent.getInstance().addPropertyChangeListener(new CometPropertyChangeListener(this));
+            }
+        };
+
+        return ok(comet);
     }
 }
