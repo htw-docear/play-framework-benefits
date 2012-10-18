@@ -2,11 +2,14 @@ package controllers;
 
 import org.apache.commons.io.FileUtils;
 import play.*;
+import play.libs.F;
 import play.mvc.*;
 
 import sync.FileContent;
+import sync.WebSocketPropertyChangeListener;
 import views.html.*;
 
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,7 +25,7 @@ public class Application extends Controller {
         if (filePart != null) {
             try {
                 final String fileContent = FileUtils.readFileToString(filePart.getFile());
-                FileContent.set(fileContent);
+                FileContent.getInstance().setContent(fileContent);
                 return ok("File uploaded");
             } catch (IOException e) {
                 final String message = "can't open uploaded file";
@@ -36,6 +39,14 @@ public class Application extends Controller {
     }
 
     public static Result displaySyncedTextFile() {
-        return ok(syncText.render(FileContent.get()));
+        return ok(syncText.render(FileContent.getInstance().getContent()));
+    }
+
+    public static WebSocket<String> updateFeed() {
+        return new WebSocket<String>() {
+            public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+                FileContent.getInstance().addPropertyChangeListener(new WebSocketPropertyChangeListener(out));
+            }
+        };
     }
 }
