@@ -1,3 +1,4 @@
+import java.util.Locale
 import sbt._
 import Keys._
 import PlayProject._
@@ -17,7 +18,7 @@ object ApplicationBuild extends Build {
       resolvers += "schleichardts Github" at "http://schleichardt.github.com/jvmrepo/"
     ).settings(
       sourceGenerators in Compile <+= (sourceManaged in Compile) map { dir =>
-        val format = new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+        val format = new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.GERMANY)
         val formattedDate = format.format(new java.util.Date())
         val file = dir / "app" / "Info.java"
         IO.write(file, """package app;
