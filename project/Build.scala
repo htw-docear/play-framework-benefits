@@ -1,4 +1,4 @@
-import java.util.Locale
+import java.util.{TimeZone, Locale}
 import sbt._
 import Keys._
 import PlayProject._
@@ -19,6 +19,7 @@ object ApplicationBuild extends Build {
     ).settings(
       sourceGenerators in Compile <+= (sourceManaged in Compile) map { dir =>
         val format = new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.GERMANY)
+        format.setTimeZone(TimeZone.getTimeZone("CET"));
         val formattedDate = format.format(new java.util.Date())
         val file = dir / "app" / "Info.java"
         IO.write(file, """package app;
