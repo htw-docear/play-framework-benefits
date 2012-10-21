@@ -6,7 +6,6 @@
         var wsUrl = "@controllers.routes.WebSocketSync.feed().webSocketURL(request)"
         var websocket = new WebSocket(wsUrl);
         var $output = $("#synced-text-file")
-        $output.html("gefunden")
         websocket.onopen = function (event) {
             $("#ws-status").html("connection established")
         }
