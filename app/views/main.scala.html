@@ -1,14 +1,106 @@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
-        <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
-        <script src='@routes.Assets.at("javascripts/jquery-1.7.1.min.js")' type="text/javascript"></script>
-    </head>
-    <body>
-        @content
-    </body>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
+    <script src='@routes.Assets.at("javascripts/jquery-1.7.1.min.js")' type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href='@routes.Assets.at("stylesheets/bootstrap.css")' rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+    <link href='@routes.Assets.at("stylesheets/bootstrap-responsive.css")' rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Docear</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container-fluid">
+
+
+
+    <div class="row-fluid">
+
+
+
+
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Synchronization</li>
+                        <li><a href="@controllers.routes.LongPolling.index()">Long Polling Sync</a></li>
+                        <li><a href="@controllers.routes.WebSocketSync.index()">WebSocket Sync</a></li>
+                        <li><a href="@controllers.routes.CometSync.index()">Comet Sync</a></li>
+                        <li>Server-Side Events</li>
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+            <div class="">
+                <h1>@title</h1>
+                @content
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
+
+    <hr>
+
+    <footer>
+        <p>&copy; Docear 2012</p>
+    </footer>
+
+</div><!--/.fluid-container-->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src='@routes.Assets.at("javascripts/bootstrap-transition.js")' ></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-alert.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-modal.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-dropdown.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-scrollspy.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-tab.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-tooltip.js")'></script>
+<script src='@routes.Assets.at("javascripts//bootstrap-popover.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-button.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-collapse.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-carousel.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootstrap-typeahead.js")'></script>
+
+</body>
 </html>

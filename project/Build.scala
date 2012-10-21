@@ -8,6 +8,7 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
+      "info.schleichardt" %% "play-2-twitter-bootstrap-integration" % "0.1-SNAPSHOT",
       "info.schleichardt" %% "play-2-basic-auth" % "0.1-SNAPSHOT",
       "commons-io" % "commons-io" % "2.4"//heroku does not find it without the explicit dependency
     )
