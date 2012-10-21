@@ -3,14 +3,36 @@
 @main("Long polling"){
 <script type="text/javascript">
     function long_polling() {
-        $.get('@controllers.routes.LongPolling.feed()', function(data) {
-            $('#synced-text-file').html(data);
-            long_polling();
-        });
+        $.ajax({
+            url:'@controllers.routes.LongPolling.feed()',
+            type:"GET",
+            dataType:"json",
+            timeout:25000, //seconds
+            success:function (response) {
+                console.log(response)
+                if (response.refresh) {
+                    $('#synced-text-file').html(response.syncedText);
+                }
+                long_polling();
+            },
+            error:function (x, textStatus, m) {
+                if (textStatus === "timeout") {
+                    long_polling();
+                } else {//it is "error" if server is dead
+                    console.log("error-message=" + textStatus)
+                    $("#status").removeClass("hide")
+                    $("#status-text").html("connection error")
+                }
+            }
+        })
     }
     long_polling();
 </script>
 <pre id="synced-text-file">
 @content
 </pre>
+<div id="status" class="alert alert-error hide">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <div id="status-text"></div>
+</div>
 }
