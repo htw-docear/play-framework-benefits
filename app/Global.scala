@@ -2,7 +2,7 @@
 
 import _root_.info.schleichardt.play2.basicauth._
 import play.api.{Logger, Play, GlobalSettings}
-import play.api.mvc.RequestHeader
+import play.api.mvc.{Handler, RequestHeader}
 
 object Global extends GlobalSettings {
   //-Dbasic.auth.enabled=true
@@ -15,10 +15,18 @@ object Global extends GlobalSettings {
   val credentialSource = new CredentialsFromConfCheck
 
   override def onRouteRequest(request: RequestHeader) = {
-    if (basicAuthEnabled) {
-      requireBasicAuthentication(request, credentialSource) {super.onRouteRequest(request)}
+    val handlerOption: Option[Handler] = if (basicAuthEnabled) {
+      requireBasicAuthentication(request, credentialSource) {
+        super.onRouteRequest(request)
+      }
     } else {
       super.onRouteRequest(request)
     }
+
+    if(Logger.isDebugEnabled && !request.path.startsWith("/assets")) {
+      Logger.debug(request.path)
+    }
+
+    handlerOption
   }
 }
