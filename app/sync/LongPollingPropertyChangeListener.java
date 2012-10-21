@@ -14,7 +14,6 @@ public class LongPollingPropertyChangeListener implements PropertyChangeListener
     public LongPollingPropertyChangeListener(Results.Chunks.Out<String> out, FileContent fileContent) {
         this.out = out;
         this.fileContent = fileContent;
-        out.write("{");
     }
 
     @Override
@@ -23,7 +22,7 @@ public class LongPollingPropertyChangeListener implements PropertyChangeListener
         ObjectNode result = Json.newObject();
         result.put("syncedText", content);
         result.put("refresh", true);
-        out.write(result.toString().substring(1));//{ written before to get 55 seconds timeout instead of 30, see https://devcenter.heroku.com/articles/request-timeout
+        out.write(result.toString());
         out.close();
         fileContent.removePropertyChangeListener(this);
     }

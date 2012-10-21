@@ -7,7 +7,7 @@
             url:'@controllers.routes.LongPolling.feed()',
             type:"GET",
             dataType:"json",
-            timeout:52000, //milliseconds
+            timeout:29000, //milliseconds
             success:function (response) {
                 console.log(response)
                 if (response.refresh) {
