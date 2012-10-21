@@ -15,18 +15,16 @@ object Global extends GlobalSettings {
   val credentialSource = new CredentialsFromConfCheck
 
   override def onRouteRequest(request: RequestHeader) = {
-    val handlerOption: Option[Handler] = if (basicAuthEnabled) {
+    if(Logger.isDebugEnabled && !request.path.startsWith("/assets")) {
+      Logger.debug(request.path)
+    }
+
+    if (basicAuthEnabled) {
       requireBasicAuthentication(request, credentialSource) {
         super.onRouteRequest(request)
       }
     } else {
       super.onRouteRequest(request)
     }
-
-    if(Logger.isDebugEnabled && !request.path.startsWith("/assets")) {
-      Logger.debug(request.path)
-    }
-
-    handlerOption
   }
 }
