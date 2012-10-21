@@ -1,0 +1,26 @@
+@(content: String)
+
+@main("WebSockets"){
+<script type="text/javascript">
+    $(document).ready(function () {
+        var wsUrl = "@controllers.routes.WebSocketSync.feed().webSocketURL(request)"
+        var websocket = new WebSocket(wsUrl);
+        var $output = $("#synced-text-file")
+        $output.html("gefunden")
+        websocket.onopen = function (event) {
+            $("#ws-status").html("connection established")
+        }
+        websocket.onmessage = function (event) {
+            $output.html(event.data)
+        }
+        websocket.onerror = function (event) {
+            $("#ws-status").html("WEBSOCKET CONNECTION ERROR")
+        }
+    });
+</script>
+<pre id="synced-text-file">
+@content
+</pre>
+<p id="ws-status">No connection with WebSockets established.<br/>WebSockets does not work with every Browser and Server.
+    WebSockets does not work on Heroku.com (subdomains with *.herokuapp.com).</p>
+}

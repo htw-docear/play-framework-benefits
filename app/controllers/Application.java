@@ -1,24 +1,20 @@
 package controllers;
 
 import org.apache.commons.io.FileUtils;
-import play.*;
-import play.libs.Comet;
-import play.libs.F;
-import play.mvc.*;
-
-import sync.CometPropertyChangeListener;
+import play.Logger;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
 import sync.FileContent;
-import sync.LongPollingPropertyChangeListener;
-import sync.WebSocketPropertyChangeListener;
-import views.html.*;
+import views.html.Application.index;
 
 import java.io.IOException;
 
 public class Application extends Controller {
-  
-  public static Result index() {
-    return ok(index.render("Your new application is ready."));
-  }
+
+    public static Result index() {
+        return ok(index.render("Home"));
+    }
 
     public static Result uploadSync() {
         Http.MultipartFormData body = request().body().asMultipartFormData();
@@ -37,40 +33,5 @@ public class Application extends Controller {
             flash("error", "Missing file");
             return redirect(routes.Application.index());
         }
-    }
-
-    public static Result displaySyncedTextFile() {
-        return ok(syncText.render(FileContent.getInstance().getContent()));
-    }
-
-    public static WebSocket<String> updateFeed() {
-        return new WebSocket<String>() {
-            public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
-                FileContent.getInstance().addPropertyChangeListener(new WebSocketPropertyChangeListener(out));
-            }
-        };
-    }
-
-    public static Result cometUpdateFeed() {
-        Comet comet = new Comet("parent.cometMessage") {
-            public void onConnected() {
-                FileContent.getInstance().addPropertyChangeListener(new CometPropertyChangeListener(this));
-            }
-        };
-
-        return ok(comet);
-    }
-
-    public static Result longPollingUpdateFeed() {
-        Chunks<String> chunks = new StringChunks() {
-            public void onReady(Chunks.Out<String> out) {
-                FileContent.getInstance().addPropertyChangeListener(new LongPollingPropertyChangeListener(out));
-            }
-        };
-        return ok(chunks);
-    }
-
-    public static Result showLongPollingTextSync() {
-        return ok(longPolling.render(FileContent.getInstance().getContent()));
     }
 }

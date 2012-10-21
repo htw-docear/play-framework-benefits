@@ -1,0 +1,15 @@
+@(content: String)
+
+@main("Comet sync"){
+<script type="text/javascript">
+    var cometMessage = function(event) {
+        console.log('Received event: ' + event)
+        $("#synced-text-file").html(event)
+    }
+</script>
+<pre id="synced-text-file">
+@content
+</pre>
+}
+<p>This is an forever iframe so the page will never be completely loaded.</p>
+<iframe src="@controllers.routes.CometSync.feed()"></iframe>
