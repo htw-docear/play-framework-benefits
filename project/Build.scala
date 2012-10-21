@@ -15,6 +15,19 @@ object ApplicationBuild extends Build {
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
       resolvers += "schleichardts Github" at "http://schleichardt.github.com/jvmrepo/"
+    ).settings(
+      sourceGenerators in Compile <+= (sourceManaged in Compile) map { dir =>
+        val format = new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+        val formattedDate = format.format(new java.util.Date())
+        val file = dir / "app" / "Info.java"
+        IO.write(file, """package app;
+                         |
+                         |public class Info {
+                         |    public static final String BUILD_TIMESTAMP = "%s";
+                         |}
+                         |""".stripMargin.format(formattedDate))
+        Seq(file)
+      }
     )
 
 }
