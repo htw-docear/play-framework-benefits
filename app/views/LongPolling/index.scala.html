@@ -7,7 +7,7 @@
             url:'@controllers.routes.LongPolling.feed()',
             type:"GET",
             dataType:"json",
-            timeout:29000, //milliseconds
+            timeout: @play.Play.application().configuration().getInt("longpolling.clientside.timeout"), //milliseconds
             success:function (response) {
                 console.log(response)
                 if (response.refresh) {
