@@ -1,0 +1,40 @@
+@main("Server Push") {
+<table>
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Vorteile</th>
+            <th>Nachteile</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Polling</td>
+            <td>höchste Kompatibilität mit Servern und Browsern</td>
+            <td>Server- und Clientlast</td>
+        </tr>
+        <tr>
+            <td>Long Polling</td>
+            <td>Kompatibilität mit Servern und Browsern</td>
+            <td>leicht langsam<br />mehr Datenverkehr als andere Möglichkeiten</td>
+        </tr>
+        <tr>
+            <td>Comet mit forever iframe</td>
+            <td>Kompatibilität mit Servern und Browsern<br>schnell</td>
+            <td>Seite nie fertig geladen<br>Escape-Taste beendet feed</td>
+        </tr>
+        <tr>
+            <td>WebSockets</td>
+            <td>spart traffic<br>schnell<br>API</td>
+            <td>Browser- und Serverunterstützung</td>
+        </tr>
+        <tr>
+            <td>Server-Side events</td>
+            <td>spart traffic<br>schnell<br>API</td>
+            <td>Browser- und Serverunterstützung (schlechter als WebSockets)</td>
+        </tr>
+        </tbody>
+    </table>
+</table>
+}

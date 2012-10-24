@@ -20,5 +20,8 @@ GET     /sync/websockets/feed       controllers.WebSocketSync.feed()
 GET     /sync/long-polling         controllers.LongPolling.index()
 GET     /sync/long-polling/feed    controllers.LongPolling.feed()
 
+GET     /doc/serverpush            controllers.Application.doc(name = "serverpush")
+GET     /doc/:name                 controllers.Application.doc(name: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

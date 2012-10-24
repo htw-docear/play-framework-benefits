@@ -34,4 +34,8 @@ public class Application extends Controller {
             return redirect(routes.Application.index());
         }
     }
+
+    public static Result doc(final String name) {
+        return ok(views.html.Docs.serverpush.render());
+    }
 }
