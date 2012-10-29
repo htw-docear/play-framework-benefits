@@ -1,1 +1,8 @@
-#synced-text-file {border: dotted 1px grey}
+#synced-text-file {border: dotted 1px gray}
+
+#scrum-open h3 {border-bottom: solid 2px red;}
+#scrum-inprogress h3 {border-bottom: solid 2px yellow;}
+#scrum-done h3 {border-bottom: solid 2px green;}
+
+.user-story .body {border-bottom: dotted 1px gray; padding-bottom: 10px;}
+.user-story .footer {min-height: 40px; padding-top: 10px; }
