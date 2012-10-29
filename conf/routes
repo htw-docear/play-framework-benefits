@@ -23,5 +23,8 @@ GET     /sync/long-polling/feed    controllers.LongPolling.feed()
 GET     /doc/serverpush            controllers.Application.doc(name = "serverpush")
 GET     /doc/:name                 controllers.Application.doc(name: String)
 
+
+GET     /user-stories             controllers.UserStories.index()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
