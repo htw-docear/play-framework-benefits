@@ -1,7 +1,7 @@
 $ ->
   #api documentation http://developer.github.com/v3/issues/
-  # https://api.github.com/repos/htw-docear/user-stories-proof-of-concept/issues?sort=created&direction=asc
-  $.getJSON "https://api.github.com/repos/htw-docear/user-stories-proof-of-concept/issues?callback=?", {
+  # https://api.github.com/repos/Docear/Desktop/issues?sort=created&direction=asc
+  $.getJSON "https://api.github.com/repos/Docear/Desktop/issues?callback=?", {
    sort : "created"
    direction : "asc"
   }, (data) ->
